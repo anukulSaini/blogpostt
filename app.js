@@ -8,6 +8,11 @@ Comment               = require("./models/comments"),
 User                  = require("./models/user"),
 app                   = express();
 
+var indexRoutes      =require("./routes/authentication"),   
+    commentRoutes    =require("./routes/comments"),
+	campgroundRoutes =require("./routes/campgrounds")
+
+
 mongoose.connect("mongodb://localhost:27017/restfullApp",{useNewUrlParser:true});
 
 app.use(passport.initialize());

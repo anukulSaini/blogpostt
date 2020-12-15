@@ -6,10 +6,10 @@ localStrategy         = require("passport-local"),
 passportLocalMongoose = require("passport-local-mongoose")
 	
 
-app.get("/register",function(req,res){
+Router.get("/register",function(req,res){
 	res.render();
 });
-app.post("/register",function(req,res){
+Router.post("/register",function(req,res){
 	req.body.username
 	req.body.password
 	var newUser=new User({username:req.body.username})
@@ -24,15 +24,17 @@ app.post("/register",function(req,res){
 		}
 	});
 });
-app.get("/login",function(req,res){
+Router.get("/login",function(req,res){
 	res.render("login");
 });
-app.post("/login",passport.authenticate("local",{
+Router.post("/login",passport.authenticate("local",{
 	successRedirect:"/",
 	failureRedirect:"/login"
 }),function(req,res){
 });
-app.get("/logout",function(req,res){
+Router.get("/logout",function(req,res){
 	req.logout();
 	res.redirect("/");
 });
+
+module.exports = router;

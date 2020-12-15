@@ -3,7 +3,7 @@ router         = express.Router({mergeParams:true}),
 Comment        = require("../models/comment"),
 Blog           = require("../models/campground")
 
-app.get("/blogs/:id/comments/new",isLoggedIn,function(req,res){
+Router.get("/blogs/:id/comments/new",isLoggedIn,function(req,res){
 	Blog.findById(req.params.id,function(err,blog){
 		if(err){
 			console.log(err);
@@ -13,7 +13,7 @@ app.get("/blogs/:id/comments/new",isLoggedIn,function(req,res){
 		}
 	})
 });
-app.post("/blogs/:id/comments",isLoggedIn,function(req,res){
+Router.post("/blogs/:id/comments",isLoggedIn,function(req,res){
 	Blog.findById(req.params.id,function(err,blog){
 			if(err){
 				res.redirect("/blogs")
@@ -45,7 +45,7 @@ app.post("/blogs/:id/comments",isLoggedIn,function(req,res){
 			
 		 })
 });
-app.delete("/blogs/:id/comments/:comment_id",checkCommentOwnerShip,function(req,res){
+Router.delete("/blogs/:id/comments/:comment_id",checkCommentOwnerShip,function(req,res){
 		Comment.findByIdAndRemove(req.params.comment_id,function(err){
 			if(err){
 				res.redirect("back");
@@ -86,3 +86,4 @@ function checkOwnerShip(req,res,next){
 				res.redirect("back");
 				}
 }
+module.exports = router;
